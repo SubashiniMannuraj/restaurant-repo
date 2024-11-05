@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order - Non-Veg Delight</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #d9534f;
+        }
+        .dish {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .dish img {
+            width: 50px;
+            border-radius: 5px;
+        }
+        .quantity {
+            width: 60px;
+        }
+        .order-summary {
+            margin-top: 20px;
+            border-top: 2px solid #d9534f;
+            padding-top: 10px;
+        }
+        .submit-button {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Place Your Order</h2>
+    
+    <div class="dish">
+        <img src="BBQ Honey chicken.jpg" alt="Spicy Chicken Wings">
+        <span>Spicy Chicken Wings - ₹250</span>
+        <input type="number" class="quantity" value="1" min="1">
+    </div>
+    
+    <div class="dish">
+        <img src="chicken burger.jpg" alt="BBQ Ribs">
+        <span>BBQ Ribs - ₹350</span>
+        <input type="number" class="quantity" value="1" min="1">
+    </div>
+
+    <div class="order-summary">
+        <h3>Order Summary</h3>
+        <p><strong>Total: </strong> <span id="total-price">₹600</span></p>
+    </div>
+
+    <h3>Your Information</h3>
+    <form id="order-form">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="text" placeholder="Delivery Address" required>
+        
+        <label for="instructions">Special Instructions:</label>
+        <textarea id="instructions" rows="3" placeholder="Any special requests?"></textarea>
+        
+        <button type="submit" class="submit-button">Submit Order</button>
+    </form>
+</div>
+
+<script>
+    const quantityInputs = document.querySelectorAll('.quantity');
+    const totalPriceElement = document.getElementById('total-price');
+
+    function calculateTotal() {
+        let total = 0;
+        total += quantityInputs[0].value * 250; // Spicy Chicken Wings price
+        total += quantityInputs[1].value * 350; // BBQ Ribs price
+        totalPriceElement.innerText = '₹' + total;
+    }
+
+    quantityInputs.forEach(input => {
+        input.addEventListener('input', calculateTotal);
+    });
+
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert("Your order has been placed successfully!");
+        // Here you can add code to handle the form submission, e.g., send data to the server.
+    });
+
+    // Initial calculation
+    calculateTotal();
+</script>
+
+</body>
+</html>
